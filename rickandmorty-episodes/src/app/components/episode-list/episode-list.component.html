@@ -1,0 +1,23 @@
+<h2>Episodios de Rick and Morty</h2>
+
+<button (click)="loadEpisodes()" [disabled]="loading()">
+  {{ loading() ? 'Cargando...' : 'Cargar episodios' }}
+</button>
+
+@if (error()) {
+  <p style="color: red">{{ error() }}</p>
+}
+
+<ul>
+  @for (ep of episodes(); track ep.id) {
+    <li>
+      <strong>{{ ep.name }}</strong>
+      — {{ ep.episode }}
+      — {{ ep.air_date }}
+    </li>
+  } @empty {
+    @if (!loading() && !error()) {
+      <li>Pulsa el botón para cargar los episodios.</li>
+    }
+  }
+</ul>
